@@ -2,9 +2,11 @@
 
 A ATBcoin blockchain explorer web application service for [ATBcore Node](https://github.com/segwit/atbcore-node) using the [ATB Insight API](https://github.com/segwit/atb-insight-api).
 
-## Getting Started
+## Getting Started 
 
 To manually install all of the necessary components, you can run these commands:
+
+Global install:
 
 ```bash
 npm install -g atbcore-node
@@ -12,10 +14,58 @@ atbcore-node create mynode
 cd mynode
 atbcore-node install atb-insight-api
 atbcore-node install atb-insight-ui
+```
+
+Set path to `atbcoind` [ATBcoin insight blockchain](https://github.com/segwit/atbcoin-insight) for `atbcore-node.json` in a `exec` field
+
+Start node:
+
+```bash
 atbcore-node start
 ```
 
 Open a web browser to `http://localhost:3001/insight/`
+
+Local install:
+```bash
+npm install atbcore-node
+$(npm bin)/atbcore-node create mynode
+cd mynode
+$(npm bin)/atbcore-node install atb-insight-api
+$(npm bin)/atbcore-node install atb-insight-ui
+```
+
+Set path to `atbcoind` [ATBcoin insight](https://github.com/segwit/atbcoin-insight) for `atbcore-node.json` in a `exec` field
+
+Start node:
+
+```bash
+$(npm bin)/atbcore-node start
+```
+
+Open a web browser to `http://localhost:3001/insight/`
+
+**Note:** You can use an existing ATBcoin data directory, however `txindex`, `addressindex`, `timestampindex` and `spentindex` needs to be set to true in `atbcoin.conf`, as well as a few other additional fields.
+
+Example `atbcoin.conf`:
+```
+server=1
+whitelist=127.0.0.1
+txindex=1
+addressindex=1
+timestampindex=1
+spentindex=1
+zmqpubrawtx=tcp://127.0.0.1:28332
+zmqpubhashblock=tcp://127.0.0.1:28332
+rpcallowip=127.0.0.1
+rpcuser=atbusername
+rpcpassword=myatbcoinpassword
+rpcport=18332
+reindex=1
+gen=0
+addrindex=1
+```
+
 
 ## Development
 
