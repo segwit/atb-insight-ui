@@ -549,6 +549,7 @@ margin-left: 0;
 
 .btn-copy {
   background: transparent url('../img/icons/copy.png') center center no-repeat;
+  cursor: pointer;
 }
 
 .btn-copy .tooltip {
@@ -557,8 +558,8 @@ margin-left: 0;
   margin-top: -2px;
   opacity: 0;
 }
-.btn-copy.zeroclipboard-is-hover { color: #2a6496; }
-.btn-copy.zeroclipboard-is-active .tooltip { opacity: 1; }
+.btn-copy.clipboard-is-hover { color: #2a6496; }
+.btn-copy.clipboard-is-active .tooltip { opacity: 1; }
 
 .tx-id {
   background-color: #373D42;

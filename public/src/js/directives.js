@@ -40,39 +40,47 @@ angular.module('insight')
       }
     };
   })
-  .directive('clipCopy', function() {
-    ZeroClipboard.config({
-      moviePath: '/lib/zeroclipboard/ZeroClipboard.swf',
-      trustedDomains: ['*'],
-      allowScriptAccess: 'always',
-      forceHandCursor: true
-    });
+    .directive('ngclipboard', [ '$timeout', '$window', 'gettextCatalog', function($timeout, $window, gettextCatalog) {
+        return {
+            restrict: 'A',
+            scope: {
+                ngclipboardSuccess: '&',
+                ngclipboardError: '&'
+            },
+            transclude: true,
+            link: function(scope, element) {
+                var clipboard = new $window.Clipboard(element[0]),
+                    translate = gettextCatalog.getString('Copied'),
+                    copiedElement = angular.element('<div class="tooltip fade right in"><div class="tooltip-arrow"></div><div class="tooltip-inner">' + translate + '</div></div>');
 
-    return {
-      restric: 'A',
-      scope: { clipCopy: '=clipCopy' },
-      template: '<div class="tooltip fade right in"><div class="tooltip-arrow"></div><div class="tooltip-inner">Copied!</div></div>',
-      link: function(scope, elm) {
-        var clip = new ZeroClipboard(elm);
+                element.append(copiedElement);
 
-        clip.on('load', function(client) {
-          var onMousedown = function(client) {
-            client.setText(scope.clipCopy);
-          };
+                clipboard.on('success', function(e) {
+                    scope.$apply(function () {
 
-          client.on('mousedown', onMousedown);
+                        element.addClass('clipboard-is-active');
 
-          scope.$on('$destroy', function() {
-            client.off('mousedown', onMousedown);
-          });
-        });
+                        $timeout(function() {
+                            element.removeClass('clipboard-is-active');
+                        }, 2000);
 
-        clip.on('noFlash wrongflash', function() {
-          return elm.remove();
-        });
-      }
-    };
-  })
+                        scope.ngclipboardSuccess({
+                            e: e
+                        });
+
+                    });
+                });
+
+                clipboard.on('error', function(e) {
+                    scope.$apply(function () {
+                        scope.ngclipboardError({
+                            e: e
+                        });
+                    });
+                });
+            }
+        };
+    }])
   .directive('focus', function ($timeout) {
     return {
       scope: {
