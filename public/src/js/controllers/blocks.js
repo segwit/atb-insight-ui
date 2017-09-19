@@ -15,7 +15,7 @@ angular.module('insight.blocks').controller('BlocksController',
       $location.path('/');
     });
   }
-      console.log('$element', $element);
+
   //Datepicker
   var _formatTimestamp = function (date) {
     var yyyy = date.getUTCFullYear().toString();
