@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('insight.blocks').controller('BlocksController',
-  function($scope, $rootScope, $routeParams, $location, Global, Block, Blocks, BlockByHeight) {
+  function($scope, $rootScope, $routeParams, $location, Global, Block, Blocks, BlockByHeight, $element) {
   $scope.global = Global;
   $scope.loading = false;
 
@@ -15,7 +15,7 @@ angular.module('insight.blocks').controller('BlocksController',
       $location.path('/');
     });
   }
-
+      console.log('$element', $element);
   //Datepicker
   var _formatTimestamp = function (date) {
     var yyyy = date.getUTCFullYear().toString();
@@ -31,10 +31,22 @@ angular.module('insight.blocks').controller('BlocksController',
     }
   });
 
-  $scope.openCalendar = function($event) {
+  $scope.isDateDisabled = function(date, mode, minDate) {
+      var result = false;
+
+      if (new Date(minDate) >= date) {
+          result = true;
+      }
+      //fix
+      $element[0].querySelector('[datepicker] thead button').disabled = result;
+
+      return result;
+
+  };
+
+  $scope.openCalendar = function($event, s) {
     $event.preventDefault();
     $event.stopPropagation();
-
     $scope.opened = true;
   };
 
