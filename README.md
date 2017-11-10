@@ -16,7 +16,7 @@ atbcore-node install atb-insight-api
 atbcore-node install atb-insight-ui
 ```
 
-Set path to `atbcoind` [ATBcoin insight blockchain](https://github.com/segwit/atbcoin-insight) for `atbcore-node.json` in a `exec` field
+Set path to `atbcoind` [ATBcoin insight blockchain](https://github.com/segwit/atbcoin) for `atbcore-node.json` in a `exec` field
 
 Start node:
 
@@ -35,7 +35,7 @@ $(npm bin)/atbcore-node install atb-insight-api
 $(npm bin)/atbcore-node install atb-insight-ui
 ```
 
-Set path to `atbcoind` [ATBcoin insight](https://github.com/segwit/atbcoin-insight) for `atbcore-node.json` in a `exec` field
+Set path to `atbcoind` [ATBcoin insight](https://github.com/segwit/atbcoin) for `atbcore-node.json` in a `exec` field
 
 Start node:
 
